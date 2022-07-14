@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Naktiesžemė - Lietuviškas Minecraft Serveris!</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marius Bernatavičius @ webskin.lt">
+
+    <!-- STYLE INCLUDES -->
+    <link rel="stylesheet" href="src/css/main.css?v=220310">
+    <link rel="stylesheet" href="src/css/responsive.css?v=220310">
+
+    <!-- FONT INCLUDES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FONTAWESOME INCLUDE -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+</head>
+
+<body>
+    <header class="container">
+        <div class="site-logo">
+            <a href="">Naktiesžemė</a>
+        </div>
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="https://discord.gg/W43f659mz8">Discord</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-nav-overlay">
+            <div class="mobile-nav-container">
+                <button class="close-nav">x</button>
+                <b>Navigacija</b>
+                <ul>
+                    </li>
+                    <li><a href="https://discord.gg/W43f659mz8">Discord</a></li>
+                </ul>
+            </div>
+        </div>
+        <button class="open-nav"><img src="src/img/menu.png" alt="www.mcbegedis.lt"></button>
+    </header>
+
+    <section class="who-are-we container">
+        <div>
+            <h1>Kas mes tokie?</h1>
+            <span>Naktiesžemė - Lietuviškas Minigames Minecraft Serveris! .💙</span>
+        </div>
+        <img src="src/img/steves.svg" alt="www.mcbegedis.lt">
+    </section>
+
+    <section class="social-media">
+        <h2>Sek mus socialiniuose tinkluose!</h2>
+        <div>
+            <a target="_blank" href="https://discord.com/invite/GEqmcZHT2E"><img src="src/img/DC.svg" alt=""></a>
+            <a target="_blank" href="https://www.instagram.com/mcbegedis/"><img src="src/img/INSTA.svg" alt=""></a>
+            <a target="_blank" href="https://www.tiktok.com/@mcbegedis"><img src="src/img/TIKTOK.svg" alt=""></a>
+            <a target="_blank" href="https://www.youtube.com/channel/UCYoRRgpMRZgbAd7Yj8iK3mA"><img src="src/img/YT.svg" alt=""></a>
+            <a target="_blank" href="https://www.facebook.com/mcbegedis.lt/"><img src="src/img/FB.svg" alt=""></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Gero žaidimo Nakties žemėja 2022</p>
+    </footer>
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "103059871983374");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v14.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script src="src/circles.min.js"></script>
+
+    <script>
+        let onlineUsers = 0;
+
+        function copyStringToClipboard(str) {
+            var el = document.createElement('textarea');
+            el.value = str;
+
+            el.setAttribute('readonly', '');
+            el.style = {
+                position: 'absolute',
+                left: '-9999px'
+            };
+
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            alert(`IP adresas ${str} nukopijuotas. Naudokite: CTRL + C`);
+        }
+
+        function getFromAPI(ip, port, circleId) {
+            var obj;
+            fetch(`https://mcapi.us/server/status?ip=${ip}&port=${port}`)
+                .then(res => res.json())
+                .then((data) => {
+                    initializeCircle(data.players.now, data.players.max, circleId);
+                    onlineUsers += data.players.now;
+                    updateOnlineUsers(onlineUsers);
+                });
+        }
+
+        function initializeCircle(playerCount, maxPlayers, circleId) {
+            var myCircle = Circles.create({
+                id: circleId,
+                radius: 70,
+                value: playerCount,
+                maxValue: maxPlayers,
+                width: 14,
+                text: function(value) {
+                    return `<div class="monitor-value"><p class="player-tag">Žaidžia<br><span class="player-count">${playerCount}/${maxPlayers}</span></p></div>`;
+                },
+                colors: ['#B0B0B0', '#34679B'],
+                duration: 400,
+                wrpClass: 'circles-wrp',
+                textClass: 'circles-text',
+                valueStrokeClass: 'circles-valueStroke',
+                maxValueStrokeClass: 'circles-maxValueStroke',
+                styleWrapper: true,
+                styleText: true
+            });
+        }
+
+        function updateOnlineUsers(users) {
+            document.querySelector('.online-users').innerHTML = users;
+        }
+
+        getFromAPI('play.mcbegedis.lt', '25566', 'circles-1');
+        getFromAPI('play.mcbegedis.lt', '25568', 'circles-2');
+        getFromAPI('minigames.mcbegedis.lt', '25565', 'circles-3');
+
+        document.querySelector('.close-nav').addEventListener('click', () => {
+            document.querySelector('.mobile-nav-overlay').style.display = 'none';
+            document.querySelector('body').classList.remove('nav-open');
+        });
+
+        document.querySelector('.open-nav').addEventListener('click', () => {
+            document.querySelector('.mobile-nav-overlay').style.display = 'block';
+            document.querySelector('body').classList.add('nav-open');
+        });
+    </script>
+</body>
+
+</html>

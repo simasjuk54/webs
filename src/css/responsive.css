@@ -1,0 +1,68 @@
+@media only screen and (max-width: 1600px) {
+  .who-are-we img {
+    max-width: 450px;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .who-are-we img {
+    max-width: 300px;
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1160px) {
+  .who-are-we span {
+    max-width: 100%;
+  }
+  .who-are-we img {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    width: 90%;
+  }
+  .social-media {
+    margin-top: 1em;
+    padding: 0 1em;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .open-nav {
+    display: block !important;
+  }
+  header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    background: #fff;
+  }
+  header .site-logo a {
+    color: #000;
+  }
+  header.container {
+    width: 100%;
+  }
+  .who-are-we {
+    margin-top: 1em;
+  }
+  .our-servers .server-list {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+/*# sourceMappingURL=responsive.css.map */
